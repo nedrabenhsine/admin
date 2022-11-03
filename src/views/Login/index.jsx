@@ -2,31 +2,31 @@ import axios from "axios"
 import { useState } from "react"
 import jwt_decode from "jwt-decode";
 
-export default () => {
+const Login = () => {
 
-    const [data,setData]  = useState({username:"", password:""})
-    const handleChange =({currentTarget:input})=>{
-        setData({...data, [input.name]:input.value})
-      }
-      
-      console.log(data)
-      const handleSubmit =(e)=>{
+    const [data, setData] = useState({ username: "", password: "" })
+    const handleChange = ({ currentTarget: input }) => {
+        setData({ ...data, [input.name]: input.value })
+    }
+
+    console.log(data)
+    const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:5000/auth/login`,data).then(res => {
-           
-            console.log("res of : ",res.data.access_token)
-            var decoded = jwt_decode(res.data.access_token);
-             console.log(decoded.role)
-          ///  localStorage.setItem("token",res.data.access_token)
-            setData(res.data);
-           if(decoded.role=="admin") {
-            window.location ="/dashboard"
+        axios.post(`http://localhost:5000/auth/login`, data).then(res => {
 
-           }
-          }).catch(err=>{
+            console.log("res of : ", res.data.access_token)
+            var decoded = jwt_decode(res.data.access_token);
+            console.log(decoded)
+            localStorage.setItem("token", res.data.access_token)
+            setData(res.data);
+            if (decoded.role == "admin") {
+                window.location = "/dashboard"
+
+            }
+        }).catch(err => {
             console.log(err.response)
-          })
-      }
+        })
+    }
 
 
 
@@ -35,16 +35,16 @@ export default () => {
     return (
         <>
             <div>
-            
+
                 <main className="main-content  mt-0">
                     <section>
-                        <div className="page-header min-vh-75">
+                        <div className="page-header min-vh-75 bg-primary">
                             <div className="container">
                                 <div className="row">
                                     <div className="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                                         <div className="card card-plain mt-8">
-                                            <div className="card-header pb-0 text-left bg-transparent">
-                                            <img class="size-96 company-logo bg-white" alt="company logo" _v-ab01d028="" src="https://img.jobi.tn/0796ce39-f07d-bf64-07c0-d2eb7c00ca22/version/crop/50x50/0-0/"/>
+                                            <div className="card-header pb-0 text-left ">
+                                                <img class="size-96 company-logo bg-white" alt="company logo" _v-ab01d028="" src="https://img.jobi.tn/0796ce39-f07d-bf64-07c0-d2eb7c00ca22/version/crop/50x50/0-0/" />
                                                 <h3 className="font-weight-bolder text-info text-gradient">Welcome back</h3>
                                                 <p className="mb-0">Enter votre email et mot de passe pour sign in</p>
                                             </div>
@@ -52,11 +52,11 @@ export default () => {
                                                 <form onSubmit={handleSubmit} >
                                                     <label> nom d'utilisateur</label>
                                                     <div className="mb-3">
-                                                        <input type="username" className="form-control" placeholder="username" aria-label="username"  name="username" onChange={handleChange} />
+                                                        <input type="username" className="form-control" placeholder="username" aria-label="username" name="username" onChange={handleChange} />
                                                     </div>
                                                     <label>mot de passe</label>
                                                     <div className="mb-3">
-                                                        <input type="password" className="form-control" placeholder="Password"   name="password" onChange={handleChange} />
+                                                        <input type="password" className="form-control" placeholder="Password" name="password" onChange={handleChange} />
                                                     </div>
                                                     <div className="form-check form-switch">
                                                         <input className="form-check-input" type="checkbox" id="rememberMe" defaultChecked />
@@ -75,7 +75,7 @@ export default () => {
                                             </div>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -86,3 +86,4 @@ export default () => {
         </>
     )
 }
+export default Login

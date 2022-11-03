@@ -1,13 +1,12 @@
 .ant-input {
-    border-radius: 10px !important;
+  border-radius: 10px !important;
 }
 
 .ant-table-thead > tr > th {
-background: #cb0c9f  !important;
-color: white !important;
+  background: #0c2ccb !important;
+  color: white !important;
 }
-
-
+/* 
 .ant-btn-primary {
-    background-color: #cb0c9f !important;
-}
+  background-color: #0ccb0f !important;
+} */
