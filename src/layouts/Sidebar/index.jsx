@@ -9,10 +9,8 @@ import { IconContext } from 'react-icons'
 const Sidebar = () => {
 
     const { pathname } = useLocation();
-    console.log(pathname);
     const history = useNavigate()
     const navigate = path => {
-        console.log("24", path);
         history(path)
     }
 

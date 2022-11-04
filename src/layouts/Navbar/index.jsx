@@ -1,13 +1,15 @@
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+
     const navigate = useNavigate()
     const userToken = localStorage.getItem('token');
     var decoded = jwt_decode(userToken);
-    console.log("navbar", decoded);
+
     const logout = () => {
         localStorage.removeItem('token');
-        navigate("/")
+        navigate('/')
+        window.location.reload()
     }
     return (
         <>

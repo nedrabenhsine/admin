@@ -16,24 +16,23 @@ function App() {
   return (
     <div>
       <Router forceRefresh={true} >
-        {userToken ?
-          <Routes>
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/wliddays' element={<WildDays />} />
-            <Route path='/employers' element={<Employers />} />
-            <Route path='/departments' element={<Departments />} />
-            <Route path='/updatedep/:id' element={<Updatedepart />} />
-            <Route path='/permissions' element={<Permissions />} />
-            <Route path='/remote' element={<Remote />} />
-            <Route path='/jobs' element={<Jobs />} />
-            <Route path='/candidacy' element={<Candidacy />} />
-          </Routes>
-          :
-          <Routes>
+        <Routes>
+          {userToken ?
+            <>
+              <Route path='/dashboard' element={<Dashboard />} />
+              <Route path='/wliddays' element={<WildDays />} />
+              <Route path='/employers' element={<Employers />} />
+              <Route path='/departments' element={<Departments />} />
+              <Route path='/updatedep/:id' element={<Updatedepart />} />
+              <Route path='/permissions' element={<Permissions />} />
+              <Route path='/remote' element={<Remote />} />
+              <Route path='/jobs' element={<Jobs />} />
+              <Route path='/candidacy' element={<Candidacy />} />
+            </>
+            :
             <Route path='/' element={<Login />} />
-          </Routes>
-
-        }
+          }
+        </Routes>
       </Router>
 
     </div>
