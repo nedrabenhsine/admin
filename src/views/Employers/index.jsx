@@ -342,7 +342,6 @@ const Employers = () => {
             <div class="container-fluid py-2 mt-5">
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <h3 className="text-uppercase">Employers</h3>
-
                     <button
                         type="button"
                         className="btn btn-primary p-2"
@@ -352,185 +351,186 @@ const Employers = () => {
                         ajouter employé
                         <BsPlus size={28} />
                     </button>
-                </div>
-            </div>
-            <div
-                class="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5 ms-2" id="exampleModalLabel">
-                                {" "}
-                                Ajouter nouveau employé{" "}
-                            </h1>
-                            <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                            ></button>
-                        </div>
-                        <div class="modal-body">
-                            <Form wrapperCol={{ span: 24 }} labelCol={{ span: 24 }}>
-                                <Row style={{ padding: "10px" }}>
-                                    <Col span={12} style={{ "padding-right": "20px" }}>
-                                        <Form.Item
-                                            name="firstname"
-                                            onChange={(e) => {
-                                                handleChange(e.target);
-                                            }}
-                                            label="firstname"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please input your first name!",
-                                                },
-                                            ]}
-                                        >
-                                            <Input size="large" />
-                                        </Form.Item>
-                                        <Form.Item
-                                            name="lastname"
-                                            onChange={(e) => {
-                                                handleChange(e.target);
-                                            }}
-                                            label="Prénom"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please input your last name!",
-                                                },
-                                            ]}
-                                        >
-                                            <Input size="large" />
-                                        </Form.Item>
-                                        <Form.Item
-                                            name="username"
-                                            onChange={(e) => {
-                                                handleChange(e.target);
-                                            }}
-                                            label="Email"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please input your email!",
-                                                },
-                                            ]}
-                                        >
-                                            <Input size="large" />
-                                        </Form.Item>
-                                        <Form.Item
-                                            name="password"
-                                            onChange={(e) => {
-                                                handleChange(e.target);
-                                            }}
-                                            label="Mot de passe"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please input your passowrd!",
-                                                },
-                                            ]}
-                                        >
-                                            <Input type="password" size="large" />
-                                        </Form.Item>
-                                    </Col>
-                                    <Col span={12} style={{ "padding-right": "20px" }}>
-                                        <Form.Item
-                                            name="telephone"
-                                            onChange={(e) => {
-                                                handleChange(e.target);
-                                            }}
-                                            label="Téléphone"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please input your telephone!",
-                                                },
-                                            ]}
-                                        >
-                                            <Input size="large" />
-                                        </Form.Item>
-                                        <Form.Item
-                                            name="adress"
-                                            onChange={(e) => {
-                                                handleChange(e.target);
-                                            }}
-                                            label="Addresse"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please input your address!",
-                                                },
-                                            ]}
-                                        >
-                                            <Input size="large" />
-                                        </Form.Item>
-                                        <Form.Item
-                                            name="departement"
-                                            label="Départment"
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please input your departement!",
-                                                },
-                                            ]}
-                                        >
-                                            <Select
-                                                id="departement"
-                                                placeholder="Sélectionner un department"
-                                                onChange={(value, obj) => {
-                                                    const key = parseInt(obj.key);
-                                                    console.log(key);
-                                                    handleChange({ value: key, id: "departement" });
-                                                }}
-                                            >
-                                                {departments.map((department, i) => (
-                                                    <Option key={i} value={department.name}>
-                                                        {department.name}
-                                                    </Option>
-                                                ))}
-                                            </Select>
-                                        </Form.Item>
-                                        <Form.Item>
-                                            <div
-                                                style={{
-                                                    display: "flex",
-                                                    "justify-content": "center",
-                                                    "margin-top": "50px",
-                                                }}
-                                            >
-                                                <Button
-                                                    size="large"
-                                                    onClick={(e) => PromiseNotify(e)}
-                                                    data-bs-dismiss="modal"
-                                                    type="primary"
-                                                    htmlType="submit"
+                    <div
+                        class="modal fade"
+                        id="exampleModal"
+                        tabindex="-1"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                    >
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5 ms-2" id="exampleModalLabel">
+                                        {" "}
+                                        Ajouter nouveau employé{" "}
+                                    </h1>
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                    ></button>
+                                </div>
+                                <div class="modal-body">
+                                    <Form wrapperCol={{ span: 24 }} labelCol={{ span: 24 }}>
+                                        <Row style={{ padding: "10px" }}>
+                                            <Col span={12} style={{ "padding-right": "20px" }}>
+                                                <Form.Item
+                                                    name="firstname"
+                                                    onChange={(e) => {
+                                                        handleChange(e.target);
+                                                    }}
+                                                    label="firstname"
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                            message: "Please input your first name!",
+                                                        },
+                                                    ]}
                                                 >
-                                                    Ajouter
-                                                </Button>
-                                                <Button
-                                                    data-bs-dismiss="modal"
-                                                    style={{ display: "flex", "margin-left": "50px" }}
-                                                    type="ghost"
-                                                    size="large"
+                                                    <Input size="large" />
+                                                </Form.Item>
+                                                <Form.Item
+                                                    name="lastname"
+                                                    onChange={(e) => {
+                                                        handleChange(e.target);
+                                                    }}
+                                                    label="Prénom"
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                            message: "Please input your last name!",
+                                                        },
+                                                    ]}
                                                 >
-                                                    Annuler
-                                                </Button>
-                                            </div>
-                                        </Form.Item>
-                                    </Col>
-                                </Row>
-                            </Form>
+                                                    <Input size="large" />
+                                                </Form.Item>
+                                                <Form.Item
+                                                    name="username"
+                                                    onChange={(e) => {
+                                                        handleChange(e.target);
+                                                    }}
+                                                    label="Email"
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                            message: "Please input your email!",
+                                                        },
+                                                    ]}
+                                                >
+                                                    <Input size="large" />
+                                                </Form.Item>
+                                                <Form.Item
+                                                    name="password"
+                                                    onChange={(e) => {
+                                                        handleChange(e.target);
+                                                    }}
+                                                    label="Mot de passe"
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                            message: "Please input your passowrd!",
+                                                        },
+                                                    ]}
+                                                >
+                                                    <Input type="password" size="large" />
+                                                </Form.Item>
+                                            </Col>
+                                            <Col span={12} style={{ "padding-right": "20px" }}>
+                                                <Form.Item
+                                                    name="telephone"
+                                                    onChange={(e) => {
+                                                        handleChange(e.target);
+                                                    }}
+                                                    label="Téléphone"
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                            message: "Please input your telephone!",
+                                                        },
+                                                    ]}
+                                                >
+                                                    <Input size="large" />
+                                                </Form.Item>
+                                                <Form.Item
+                                                    name="adress"
+                                                    onChange={(e) => {
+                                                        handleChange(e.target);
+                                                    }}
+                                                    label="Addresse"
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                            message: "Please input your address!",
+                                                        },
+                                                    ]}
+                                                >
+                                                    <Input size="large" />
+                                                </Form.Item>
+                                                <Form.Item
+                                                    name="departement"
+                                                    label="Départment"
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                            message: "Please input your departement!",
+                                                        },
+                                                    ]}
+                                                >
+                                                    <Select
+                                                        id="departement"
+                                                        placeholder="Sélectionner un department"
+                                                        onChange={(value, obj) => {
+                                                            const key = parseInt(obj.key);
+                                                            console.log(key);
+                                                            handleChange({ value: key, id: "departement" });
+                                                        }}
+                                                    >
+                                                        {departments.map((department, i) => (
+                                                            <Option key={i} value={department.name}>
+                                                                {department.name}
+                                                            </Option>
+                                                        ))}
+                                                    </Select>
+                                                </Form.Item>
+                                                <Form.Item>
+                                                    <div
+                                                        style={{
+                                                            display: "flex",
+                                                            "justify-content": "center",
+                                                            "margin-top": "50px",
+                                                        }}
+                                                    >
+                                                        <Button
+                                                            size="large"
+                                                            onClick={(e) => PromiseNotify(e)}
+                                                            data-bs-dismiss="modal"
+                                                            type="primary"
+                                                            htmlType="submit"
+                                                        >
+                                                            Ajouter
+                                                        </Button>
+                                                        <Button
+                                                            data-bs-dismiss="modal"
+                                                            style={{ display: "flex", "margin-left": "50px" }}
+                                                            type="ghost"
+                                                            size="large"
+                                                        >
+                                                            Annuler
+                                                        </Button>
+                                                    </div>
+                                                </Form.Item>
+                                            </Col>
+                                        </Row>
+                                    </Form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div style={{ padding: "20px" }}>
                 <Table dataSource={emp} columns={columns} />
             </div>
