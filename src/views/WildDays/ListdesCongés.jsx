@@ -1,7 +1,7 @@
-import Layout from "../../layouts/Layout"
+import React from 'react'
 import { Row, Col, Calendar, Badge, Table } from 'antd'
-export default () => {
 
+const ListdesCongés = () => {
     const getListData = (value) => {
         let listData;
 
@@ -71,22 +71,6 @@ export default () => {
         return listData || [];
     };
 
-    const getMonthData = (value) => {
-        if (value.month() === 8) {
-            return 1394;
-        }
-    };
-
-    const monthCellRender = (value) => {
-        const num = getMonthData(value);
-        return num ? (
-            <div className="notes-month">
-                <section>{num}</section>
-                <span>Backlog number</span>
-            </div>
-        ) : null;
-    };
-
     const dateCellRender = (value) => {
         const listData = getListData(value);
         return (
@@ -99,6 +83,7 @@ export default () => {
             </ul>
         );
     };
+
 
     const columns = [
         {
@@ -142,27 +127,15 @@ export default () => {
             }
         },
     ];
-
     return (
-        <>
-            <Layout>
-                <div class="container-fluid py-4">
-                    <h3>Congées</h3>
+        <Col xs={24} sm={24} md={24} lg={24} >
+            <br />
+            <br />
+            <br />
+            <Table dataSource={[{}]} columns={columns} />
 
-                    <Row>
-                        <Col xs={24} sm={24} md={24} lg={24} >
-                            <Calendar style={{ border: '1px solid lightgrey', padding: '10px' }} dateCellRender={dateCellRender} monthCellRender={monthCellRender} />
-                        </Col>
-                        <Col xs={24} sm={24} md={24} lg={24} >
-                            <br />
-                            <br />
-                            <br />
-                            <Table dataSource={[{}]} columns={columns} />
-
-                        </Col>
-                    </Row>
-                </div>
-            </Layout>
-        </>
+        </Col>
     )
 }
+
+export default ListdesCongés

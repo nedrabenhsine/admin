@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Dashboard from './views/Dashboard';
-import WildDays from './views/WildDays';
+import Calender from './views/WildDays/Calender';
+import ListdesCongés from './views/WildDays/ListdesCongés';
 import Login from './views/Login';
 import Employers from './views/Employers';
 import Departments from './views/Departments';
@@ -20,7 +21,8 @@ function App() {
           {userToken ?
             <>
               <Route path='/dashboard' element={<Dashboard />} />
-              <Route path='/wliddays' element={<WildDays />} />
+              <Route path='/Calender' element={<Calender />} />
+              <Route path='/ListdesCongés' element={<ListdesCongés />} />
               <Route path='/employers' element={<Employers />} />
               <Route path='/departments' element={<Departments />} />
               <Route path='/updatedep/:id' element={<Updatedepart />} />

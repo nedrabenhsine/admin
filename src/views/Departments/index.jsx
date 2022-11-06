@@ -7,11 +7,17 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const { Option } = Select;
 const Departments = () => {
-    const [display, setdisplay] = useState(false);
     const [dep, setdep] = useState([]);
-
+    const [data, setData] = useState({
+        name: "",
+    });
+    const handleChange = (e) => {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value,
+        });
+    };
     const getall = () => {
         axios.get(`http://localhost:5000/department/list`).then((res) => {
             const dep = res.data;
@@ -22,18 +28,6 @@ const Departments = () => {
     useEffect(() => {
         getall();
     }, [dep]);
-
-    const [data, setData] = useState({
-        name: "",
-        // nb_employer: "",
-    });
-
-    const handleChange = (e) => {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value,
-        });
-    };
 
     const onSubmit = (values) => {
         console.log(values);
@@ -84,12 +78,6 @@ const Departments = () => {
             key: "name",
         },
         {
-            title: "Nombre de employé",
-            dataIndex: "nb_employer",
-            key: "nb_employer",
-        },
-
-        {
             title: "actions",
             dataIndex: "address",
             key: "address",
@@ -104,7 +92,6 @@ const Departments = () => {
                             ></i>
                             <Link to={`/updatedep/${record.id}`}>
                                 <i
-                                    onClick={() => setdisplay(false)}
                                     style={{ fontSize: "20px" }}
                                     class="las la-edit"
                                 ></i>
@@ -203,7 +190,7 @@ const Departments = () => {
                     </div>
                 </div>
                 <div style={{ padding: "20px" }}>
-                    {!display && <Table dataSource={dep} columns={columns} />}
+                    <Table dataSource={dep} columns={columns} />
                 </div>
             </Layout>
         </>
