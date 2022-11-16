@@ -16,7 +16,7 @@ const Navbar = () => {
         className="navbar d-flex justify-content-end navbar-main navbar-expand-lg shadow-none border-radius-xl"
         navbar-scroll="true"
       >
-        <div class="dropdown me-5 pe-5">
+        <div class="dropdown me-5">
           <button
             class="btn btn-dark dropdown-toggle p-3"
             type="button"

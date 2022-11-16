@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
 import "./index.css";
+
 const Login = () => {
   const [data, setData] = useState({ username: "", password: "" });
   const handleChange = ({ currentTarget: input }) => {
@@ -81,7 +82,7 @@ const Login = () => {
                     </div>
                   </form>
                 </div>
-                <div className="text-center pt-0 px-lg-2 px-1">
+                {/* <div className="text-center pt-0 px-lg-2 px-1">
                   <p className="mb-4 text-sm mx-auto">
                     Don't have an account?
                     <a
@@ -91,7 +92,7 @@ const Login = () => {
                       Sign up
                     </a>
                   </p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

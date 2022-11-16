@@ -75,7 +75,7 @@ const Sidebar = () => {
               </a>
             </li>
             <li className={`nav-item`}>
-              <Collapse defaultActiveKey={["1"]} expandIconPosition="end" ghost>
+              <Collapse expandIconPosition="end" ghost>
                 <Panel
                   showArrow={false}
                   header={
@@ -86,7 +86,7 @@ const Sidebar = () => {
                           : "text-white"
                       }`}
                     >
-                      <div className="me-2 p-0 d-flex align-items-center justify-content-center">
+                      <div className="me-2 ms-0 p-0 d-flex align-items-center justify-content-center">
                         <BsUiChecks size={30} />
                       </div>
                       <span className="nav-link-text ms-1">
@@ -94,7 +94,6 @@ const Sidebar = () => {
                       </span>
                     </a>
                   }
-                  key="1"
                 >
                   <a
                     className={`nav-link ms-2  ${
