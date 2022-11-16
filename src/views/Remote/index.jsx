@@ -1,16 +1,21 @@
 import { Form, Button, Select, Input, Table } from "antd";
 import Layout from "../../layouts/Layout";
-import { PlusOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import "./index.css";
 import axios from "axios";
 import Swal from "sweetalert2";
-const { Option } = Select;
 const Remote = () => {
-  const [display, setdisplay] = useState(false);
   const [remote, setremote] = useState([]);
+  const [idd, setidd] = useState(0);
+  const [data, setData] = useState({
+    statut: "",
+  });
+
+  const handleChange = (value) => {
+    setData({ ...data, [value.id]: value.value });
+  };
   const getall = () => {
-    axios.get(`http://localhost:5000/permession/list`).then((res) => {
+    axios.get(`http://localhost:5000/telework/list`).then((res) => {
       // setemp(res.data);
 
       res.data = res.data.map((e) => {
@@ -19,8 +24,7 @@ const Remote = () => {
           date: e.date,
           id: e.id,
           description: e.description,
-          start_hour: e.start_hour,
-          end_hour: e.end_hour,
+          statut: e.statut,
           user: e.user.firstname,
         };
       });
@@ -28,7 +32,12 @@ const Remote = () => {
       setremote(res.data);
     });
   };
-
+  const updateStatut = (id) => {
+    console.log(id);
+    axios.patch(`http://localhost:5000/telework/${id}`, data).then((res) => {
+      console.log("res.data", res.data);
+    });
+  };
   useEffect(() => {
     getall();
   }, []);
@@ -41,31 +50,74 @@ const Remote = () => {
     },
 
     {
-      title: "Date début",
-      dataIndex: "address",
-      key: "address",
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
     },
     {
-      title: "Date fin",
-      dataIndex: "address",
-      key: "address",
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
     },
     {
       title: "Employé",
-      dataIndex: "address",
-      key: "address",
+      dataIndex: "user",
+      key: "user",
     },
     {
-      title: "actions",
-      dataIndex: "address",
-      key: "address",
+      title: "Actions",
+      dataIndex: "action",
+      key: "action",
       render: (text, record) => {
         return (
+          <div className="row d-flex justify-content-center">
+            <Select
+              id="statut"
+              placeholder="Changer le statut"
+              style={{ width: "300px" }}
+              onChange={(value, obj) => {
+                console.log(obj);
+                setidd(obj.demandeid);
+                handleChange({
+                  value: value,
+                  id: "statut",
+                });
+              }}
+              options={[
+                {
+                  value: "accepté",
+                  demandeid: record.id,
+                  label: "accepté",
+                },
+                {
+                  value: "réfusé",
+                  demandeid: record.id,
+                  label: "réfusé",
+                },
+              ]}
+            />
+            {data.statut && idd === record.id ? (
+              <button
+                className="btn btn-outline-primary btn-sm p-0 m-0 mt-2"
+                style={{ width: "200px" }}
+                onClick={() => updateStatut(record.id)}
+              >
+                Change
+              </button>
+            ) : null}
+          </div>
+        );
+      },
+    },
+    {
+      title: "statut",
+      dataIndex: "statut",
+      key: "statut",
+      render: (text, record) => {
+        console.log(record);
+        return (
           <>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <i style={{ fontSize: "20px" }} class="las la-trash-alt"></i>
-              <i style={{ fontSize: "20px" }} class="las la-edit"></i>
-            </div>
+            <div className="text-uppercase fw-bold">{text}</div>
           </>
         );
       },
