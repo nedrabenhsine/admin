@@ -8,7 +8,7 @@ import {
   SalesValueWidget,
   SalesValueWidgetPhone,
 } from "./Widgets";
-import { faCashRegister, faChartLine } from "@fortawesome/free-solid-svg-icons";
+// import { faCashRegister, faChartLine } from "@fortawesome/free-solid-svg-icons";
 
 const Dashboard = () => {
   return (
@@ -21,7 +21,7 @@ const Dashboard = () => {
               title="345k"
               period="Feb 1 - Apr 1"
               percentage={18.2}
-              icon={faChartLine}
+              icon={"faChartLine"}
               iconColor="shape-secondary"
             />
           </div>
@@ -31,7 +31,7 @@ const Dashboard = () => {
               title="$3,594"
               period="Feb 1 - Apr 1"
               percentage={-8.4}
-              icon={faCashRegister}
+              icon={"faCashRegister"}
               iconColor="shape-tertiary"
             />
           </div>
@@ -41,7 +41,7 @@ const Dashboard = () => {
               title="6,5K"
               period="May 1 - Aug 1"
               percentage={13.7}
-              icon={faCashRegister}
+              icon={"faCashRegister"}
               iconColor="shape-tertiary"
             />
           </div>

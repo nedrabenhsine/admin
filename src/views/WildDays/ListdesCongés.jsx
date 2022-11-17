@@ -34,10 +34,10 @@ const ListdesCongés = () => {
           id: e.id,
         };
       });
-
       setemp(res.data);
     });
   };
+  console.log(emp);
   console.log(data);
   const updateStatut = (id) => {
     console.log(id);

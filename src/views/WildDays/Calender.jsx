@@ -1,56 +1,94 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Row, Col, Calendar, Badge, Table } from "antd";
 import Layout from "../../layouts/Layout";
-import { useState } from "react";
 import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
-import { Row, Col, Calendar, Badge, Table } from "antd";
 
 const Calender = () => {
-  const [currentEvents, setCurrentEvents] = useState([]);
+  const [congés, setcongés] = useState([]);
+  const [permession, setpermession] = useState([]);
+  const [remotes, setremotes] = useState([]);
 
-  // const getMonthData = (value) => {
-  //     if (value.month() === 8) {
-  //         return 1394;
-  //     }
-  // };
-
-  // const monthCellRender = (value) => {
-  //     const num = getMonthData(value);
-  //     return num ? (
-  //         <div className="notes-month">
-  //             <section>{num}</section>
-  //             <span>Backlog number</span>
-  //         </div>
-  //     ) : null;
-  // };
-
-  const handleDateClick = (selected) => {
-    const title = prompt("Please enter a new title for your event");
-    const calendarApi = selected.view.calendar;
-    calendarApi.unselect();
-
-    if (title) {
-      calendarApi.addEvent({
-        id: `${selected.dateStr}-${title}`,
-        title,
-        start: selected.startStr,
-        end: selected.endStr,
-        allDay: selected.allDay,
+  const dumdata = [
+    {
+      id: "2",
+      title: "All-day event 11",
+      start: "2022-11-18",
+      end: "2022-11-19",
+      backgroundcolor: "#clclcl",
+    },
+    {
+      id: "1",
+      title: "Timed event 111",
+      start: "2022-11-21",
+      end: "2022-11-23",
+      backgroundcolor: "#clclcl",
+    },
+  ];
+  const getData = () => {
+    axios.get(`http://localhost:5000/holiday/list`).then((res) => {
+      res.data = res.data.filter((e) => {
+        if (e.statut === "accepté") {
+          return {
+            id: e.id,
+            title: e.holidaytype.name + ", " + e.user.firstname,
+            start: e.start_date,
+            end: e.end_date,
+            backgroundcolor: "#clclcl",
+          };
+        }
       });
-    }
+      res.data = res.data.map((e) => {
+        return {
+          id: e.id,
+          title: e.holidaytype.name + ", " + e.user.firstname,
+          start: e.start_date,
+          end: e.end_date,
+          backgroundcolor: "#clclcl",
+        };
+      });
+      setcongés(res.data);
+    });
+    axios.get(`http://localhost:5000/permession/list`).then((res) => {
+      res.data = res.data.map((e) => {
+        return {
+          titel: e.titel,
+          date: e.date,
+          id: e.id,
+          description: e.description,
+          start_hour: e.start_hour,
+          end_hour: e.end_hour,
+          statut: e.statut,
+          user: e.user.firstname,
+        };
+      });
+      setpermession(res.data);
+    });
+    axios.get(`http://localhost:5000/telework/list`).then((res) => {
+      res.data = res.data.map((e) => {
+        return {
+          titel: e.titel,
+          date: e.date,
+          id: e.id,
+          description: e.description,
+          statut: e.statut,
+          user: e.user.firstname,
+        };
+      });
+      setremotes(res.data);
+    });
   };
-
-  const handleEventClick = (selected) => {
-    if (
-      window.confirm(
-        `Are you sure you want to delete the event '${selected.event.title}'`
-      )
-    ) {
-      selected.event.remove();
-    }
-  };
+  // let x = congés.concat(permession);
+  // console.log("x", x);
+  // let y = x.concat(remotes);
+  // console.log("y", y);
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <>
       <Layout>
@@ -71,7 +109,7 @@ const Calender = () => {
               dayGridPlugin,
               timeGridPlugin,
               interactionPlugin,
-              //   listPlugin,
+              // listPlugin,
             ]}
             headerToolbar={{
               left: "prev,next today",
@@ -83,40 +121,8 @@ const Calender = () => {
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
-            select={handleDateClick}
-            eventClick={handleEventClick}
-            eventsSet={(events) => setCurrentEvents(events)}
-            initialEvents={[
-              {
-                id: "12315",
-                title: "All-day event",
-                date: "2022-09-14",
-              },
-              {
-                id: "5123",
-                title: "Timed event",
-                date: "2022-09-28",
-              },
-            ]}
+            events={congés}
           />
-          {/* <Layout>
-                <div class="container-fluid py-4">
-                    <h3>Congées</h3>
-
-                    <Row>
-                        <Col xs={24} sm={24} md={24} lg={24} >
-                            <Calendar style={{ border: '1px solid lightgrey', padding: '10px' }} monthCellRender={monthCellRender} />
-                        </Col>
-                        <Col xs={24} sm={24} md={24} lg={24} >
-                            <br />
-                            <br />
-                            <br />
-
-                        </Col>
-                    </Row>
-                </div>
-                 </Layout> */}
-          {/* <Table dataSource={[{}]} columns={columns} />  dateCellRender={dateCellRender} */}
         </div>
       </Layout>
     </>
