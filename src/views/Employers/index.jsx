@@ -489,7 +489,7 @@ const Employers = () => {
                               placeholder="Sélectionner un department"
                               onChange={(value, obj) => {
                                 const key = parseInt(obj.key);
-                                console.log(key);
+                                console.log("key",key);
                                 handleChange({ value: key, id: "departement" });
                               }}
                             >

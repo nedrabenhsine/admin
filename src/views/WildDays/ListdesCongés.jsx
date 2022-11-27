@@ -4,6 +4,7 @@ import { Form, Button, Select, Input, Table, Col, Row } from "antd";
 import axios from "axios";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
+import { io } from "socket.io-client";
 const { Option } = Select;
 
 const ListdesCongés = () => {
@@ -12,11 +13,9 @@ const ListdesCongés = () => {
   const [data, setData] = useState({
     statut: "",
   });
-
   const handleChange = (value) => {
     setData({ ...data, [value.id]: value.value });
   };
-
   const getall = () => {
     axios.get(`http://localhost:5000/holiday/list`).then((res) => {
       // setemp(res.data);
@@ -37,8 +36,6 @@ const ListdesCongés = () => {
       setemp(res.data);
     });
   };
-  console.log(emp);
-  console.log(data);
   const updateStatut = (id) => {
     console.log(id);
     axios.patch(`http://localhost:5000/holiday/${id}`, data).then((res) => {
@@ -47,6 +44,8 @@ const ListdesCongés = () => {
   };
   useEffect(() => {
     getall();
+    const socket = io("http://localhost:5060");
+    console.log("socket", socket);
   }, [emp]);
   const columns = [
     {

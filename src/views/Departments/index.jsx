@@ -4,7 +4,7 @@ import { BsPlus } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import "./index.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Departments = () => {
@@ -12,6 +12,39 @@ const Departments = () => {
   const [data, setData] = useState({
     name: "",
   });
+
+  const [depp, setdepp] = useState([]);
+
+  const { id } = useParams();
+  const getbyid = () => {
+    axios.get(`http://localhost:5000/department/${id}`).then((res) => {
+      const dep = res.data;
+      console.log("dep : ", dep);
+      setdep(dep);
+    });
+  };
+  const handleChangee = (e) => {
+    setdep({
+      ...dep,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmitt = (e) => {
+    e.preventDefault();
+
+    axios
+      .patch(`http://localhost:5000/department/${id}`, depp)
+      .then((res) => {
+        console.log("data of department", res.data);
+        setdepp(res.data);
+        window.location = "/departments";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleChange = (e) => {
     setData({
       ...data,
@@ -27,6 +60,7 @@ const Departments = () => {
   };
   useEffect(() => {
     getall();
+    getbyid();
   }, [dep]);
 
   const onSubmit = (values) => {
@@ -90,9 +124,86 @@ const Departments = () => {
                 class="las la-trash-alt"
                 onClick={() => onDelete(record.id)}
               ></i>
-              <Link to={`/updatedep/${record.id}`}>
-                <i style={{ fontSize: "20px" }} class="las la-edit"></i>
+              <Link>
+                <i
+                  style={{ fontSize: "20px" }}
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal2"
+                  class="las la-edit"
+                ></i>
               </Link>
+              <div
+                class="modal fade"
+                id="exampleModal2"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5 ms-2" id="exampleModalLabel">
+                        {" "}
+                        Éditer les infos d'un{" "}
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close text-dark"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      {" "}
+                      <div class="container">
+                        <h2
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            color: "red",
+                          }}
+                        >
+                          editer Départment
+                        </h2>
+
+                        <form className="form-inline" onSubmit={onSubmitt}>
+                          <div className="form-group">
+                            <label>nom:</label>
+
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={depp.name}
+                              name="name"
+                              onChange={handleChangee}
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label>nombre de employee:</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={depp.nb_employer}
+                              name="nb_employer"
+                              onChange={handleChangee}
+                            />
+                          </div>
+
+                          <button
+                            type="submit"
+                            shape="round"
+                            style={{ fontSize: "15px" }}
+                            className="btn btn-default"
+                          >
+                            editer
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </>
         );
