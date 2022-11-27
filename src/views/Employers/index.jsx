@@ -29,8 +29,6 @@ const Employers = () => {
 
   const getall = () => {
     axios.get(`http://localhost:5000/users/list`).then((res) => {
-      // setemp(res.data);
-
       res.data = res.data.map((e) => {
         return {
           departement: e.departement.name,
@@ -42,6 +40,7 @@ const Employers = () => {
           adress: e.adress,
         };
       });
+      console.log("res.data", res.data);
 
       setemp(res.data);
     });
@@ -95,6 +94,7 @@ const Employers = () => {
     getall();
     fetchAlldepartments();
   }, []);
+  console.log("emp", emp);
   const columns = [
     {
       title: "id",
@@ -487,15 +487,22 @@ const Employers = () => {
                             <Select
                               id="departement"
                               placeholder="Sélectionner un department"
-                              onChange={(value, obj) => {
-                                const key = parseInt(obj.key);
-                                console.log("key",key);
-                                handleChange({ value: key, id: "departement" });
+                              onChange={(children, obj) => {
+                                const id =
+                                  obj.children.props.children.props.children;
+                                const ID = id
+                                  .split(" ")
+                                  .map((word) => word[0])
+                                  .join("");
+                                console.log("children", ID);
+                                handleChange({ value: ID, id: "departement" });
                               }}
                             >
                               {departments.map((department, i) => (
                                 <Option key={i} value={department.name}>
-                                  {department.name}
+                                  <div className="row">
+                                    <p>{`${department.id}-${department.name}`}</p>
+                                  </div>
                                 </Option>
                               ))}
                             </Select>
