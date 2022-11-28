@@ -29,9 +29,17 @@ const Employers = () => {
 
   const getall = () => {
     axios.get(`http://localhost:5000/users/list`).then((res) => {
+      console.log("res.data", res.data);
       res.data = res.data.map((e) => {
+        console.log("e", e);
         return {
-          departement: e.departement.name,
+          departement: () => {
+            if (e.role.name !== "condidat") {
+              return e.departement.name;
+            } else {
+              return "no department";
+            }
+          },
           firstname: e.firstname,
           username: e.username,
           id: e.id,
@@ -40,7 +48,7 @@ const Employers = () => {
           adress: e.adress,
         };
       });
-      console.log("res.data", res.data);
+      console.log("res.datzzzzzzzzzzza", res.data);
 
       setemp(res.data);
     });
@@ -163,8 +171,7 @@ const Employers = () => {
                   <div class="modal-content">
                     <div class="modal-header">
                       <h1 class="modal-title fs-5 ms-2" id="exampleModalLabel">
-                        {" "}
-                        Éditer les infos d'employé{" "}
+                        Éditer les infos d'employé
                       </h1>
                       <button
                         type="button"
@@ -190,7 +197,10 @@ const Employers = () => {
                                 },
                               ]}
                             >
-                              <Input size="large" />
+                              <Input
+                                size="large"
+                                placeholder={record.firstname}
+                              />
                             </Form.Item>
                             <Form.Item
                               name="lastname"
@@ -220,7 +230,10 @@ const Employers = () => {
                                 },
                               ]}
                             >
-                              <Input size="large" />
+                              <Input
+                                size="large"
+                                placeholder={record.username}
+                              />
                             </Form.Item>
                             <Form.Item
                               name="password"
@@ -252,7 +265,10 @@ const Employers = () => {
                                 },
                               ]}
                             >
-                              <Input size="large" />
+                              <Input
+                                size="large"
+                                placeholder={record.telephone}
+                              />
                             </Form.Item>
                             <Form.Item
                               name="adress"
@@ -267,7 +283,7 @@ const Employers = () => {
                                 },
                               ]}
                             >
-                              <Input size="large" />
+                              <Input size="large" placeholder={record.adress} />
                             </Form.Item>
                             <Form.Item
                               name="departement"
