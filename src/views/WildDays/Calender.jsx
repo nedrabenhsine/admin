@@ -94,7 +94,7 @@ const Calender = () => {
       <Layout>
         <div class="container-fluid py-2 mt-5">
           <div style={{ display: "flex", "justify-content": "space-between" }}>
-            <h3 className="text-uppercase">Départements</h3>
+            <h3 className="text-uppercase">Calendrier</h3>
             <div>
               <button type="button" className="btn btn-primary p-2">
                 ajouter département
