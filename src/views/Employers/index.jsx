@@ -102,7 +102,7 @@ const Employers = () => {
     getall();
     fetchAlldepartments();
   }, []);
-  console.log("emp", emp);
+  console.log("data", data);
   const columns = [
     {
       title: "id",
@@ -301,6 +301,8 @@ const Employers = () => {
                                 onChange={(value, obj) => {
                                   const key = parseInt(obj.key);
                                   console.log(key);
+                                  console.log("key", key);
+
                                   handleChange({
                                     value: key,
                                     id: "departement",
@@ -511,7 +513,12 @@ const Employers = () => {
                                   .map((word) => word[0])
                                   .join("");
                                 console.log("children", ID);
-                                handleChange({ value: ID, id: "departement" });
+                                const blab = parseInt(ID);
+                                console.log(blab);
+                                handleChange({
+                                  value: blab,
+                                  id: "departement",
+                                });
                               }}
                             >
                               {departments.map((department, i) => (
